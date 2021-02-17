@@ -28,6 +28,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 
 
@@ -75,6 +76,13 @@ const useStyles = makeStyles(theme => ({
   },
   iconGrid: {
     paddingBottom: 20
+  },
+  dialog: {
+    width: 200
+  },
+  addItemGrid: {
+    paddingTop: 20,
+    paddingBottom: 50
   }
   
 }));
@@ -180,29 +188,58 @@ function Dashboard() {
                       <CreateIcon ></CreateIcon>
                     </Grid>
                   </Grid>
+                  
 
+                  {/* Dialog */}
                   <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    maxWidth="xs"
+                    fullWidth="true"
+                  >
+                    <DialogContent>
+                      {/* Breakfast grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Breakfast</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+                      
+                      {/* Lunch grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Lunch</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+
+                      {/* Dinner grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Dinner</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+                      
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="primary">
+                        Cancel
+                      </Button>
+                      <Button onClick={handleClose} color="primary" autoFocus>
+                        Create 
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                   
                   <Grid container spacing={2} className={classes.paddingBottom}>
                     <Grid item xs={4}>
