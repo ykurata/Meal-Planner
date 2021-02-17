@@ -18,8 +18,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-
+import CreateIcon from '@material-ui/icons/Create';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
@@ -62,9 +61,13 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5 ),
     margin: 'auto',
     maxWidth: 500,
+    align: "right"
   },
   paddingBottom: {
     paddingBottom: 20
+  },
+  icon: {
+    verticalAlign: "right"
   }
   
 }));
@@ -152,6 +155,14 @@ function Dashboard() {
               <Typography variant="h6">Monday</Typography>
               <Paper className={classes.paper}>
                 <Grid container spacing={3}>
+
+                  {/* icon grid */}
+                  <Grid container  direction="row-reverse" justify="flex-start">
+                    <Grid item >
+                      <CreateIcon ></CreateIcon>
+                    </Grid>
+                  </Grid>
+                  
                   <Grid container spacing={2} className={classes.paddingBottom}>
                     <Grid item xs={4}>
                       <Typography align="left">Breakfast</Typography>
