@@ -18,10 +18,17 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-
+import CreateIcon from '@material-ui/icons/Create';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 
 
@@ -62,9 +69,20 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5 ),
     margin: 'auto',
     maxWidth: 500,
+    align: "right"
   },
   paddingBottom: {
     paddingBottom: 20
+  },
+  iconGrid: {
+    paddingBottom: 20
+  },
+  dialog: {
+    width: 200
+  },
+  addItemGrid: {
+    paddingTop: 20,
+    paddingBottom: 50
   }
   
 }));
@@ -88,6 +106,17 @@ function Dashboard() {
         </List>
       </div>
     );
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+    
   return (
       <div className={classes.root}>
         <CssBaseline />
@@ -152,6 +181,66 @@ function Dashboard() {
               <Typography variant="h6">Monday</Typography>
               <Paper className={classes.paper}>
                 <Grid container spacing={3}>
+
+                  {/* icon grid */}
+                  <Grid container  direction="row-reverse" justify="flex-start" onClick={handleClickOpen}>
+                    <Grid item  className={classes.iconGrid}>
+                      <CreateIcon ></CreateIcon>
+                    </Grid>
+                  </Grid>
+                  
+
+                  {/* Dialog */}
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    maxWidth="xs"
+                    fullWidth="true"
+                  >
+                    <DialogContent>
+                      {/* Breakfast grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Breakfast</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+                      
+                      {/* Lunch grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Lunch</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+
+                      {/* Dinner grid */}
+                      <Grid container direction="column">
+                        <Typography variant="h6">Dinner</Typography>
+                        <TextField label="Menu Item"></TextField>
+                        <Grid container direction="row" className={classes.addItemGrid}>
+                          <AddIcon></AddIcon>
+                          <Typography>Add item</Typography>
+                        </Grid>
+                      </Grid>
+                      
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="primary">
+                        Cancel
+                      </Button>
+                      <Button onClick={handleClose} color="primary" autoFocus>
+                        Create 
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                  
                   <Grid container spacing={2} className={classes.paddingBottom}>
                     <Grid item xs={4}>
                       <Typography align="left">Breakfast</Typography>
