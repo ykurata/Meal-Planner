@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,19 +19,12 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
 import CreateIcon from '@material-ui/icons/Create';
-
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-
-
-
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -83,6 +76,9 @@ const useStyles = makeStyles(theme => ({
   addItemGrid: {
     paddingTop: 20,
     paddingBottom: 50
+  },
+  removeIcon: {
+    paddingTop: 20
   }
   
 }));
@@ -91,31 +87,47 @@ function Dashboard() {
   const dummyCategories = ['Hokusai', 'Hiroshige', 'Utamaro', 'Kuniyoshi', 'Yoshitoshi']
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [breakfastInput, setBreakfastInput] = useState(["rice"]);
+  const [lunchInput, setLunchInput] = useState([]);
+  const [dinnerInput, setDinnerInput] = useState([]);
+
   function handleDrawerToggle() {
-      setMobileOpen(!mobileOpen)
-    }
+    setMobileOpen(!mobileOpen)
+  }
+
   const drawer = (
-      <div>
-        <List>
-          {dummyCategories.map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    );
+    <div>
+      <List>
+        {dummyCategories.map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+  
 
+  // state for dialog open
   const [open, setOpen] = React.useState(false);
-
+  
+  // Oepn dialog handler
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  
+  // Close dialog hangler
   const handleClose = () => {
     setOpen(false);
   };
+  
+  // Handle add input field
+  const handleAddClick = () => {
+    setBreakfastInput([...breakfastInput, ""]);
+  };
+
+
     
   return (
       <div className={classes.root}>
@@ -185,7 +197,7 @@ function Dashboard() {
                   {/* icon grid */}
                   <Grid container  direction="row-reverse" justify="flex-start" onClick={handleClickOpen}>
                     <Grid item  className={classes.iconGrid}>
-                      <CreateIcon ></CreateIcon>
+                      <CreateIcon></CreateIcon>
                     </Grid>
                   </Grid>
                   
@@ -203,9 +215,19 @@ function Dashboard() {
                       {/* Breakfast grid */}
                       <Grid container direction="column">
                         <Typography variant="h6">Breakfast</Typography>
-                        <TextField label="Menu Item"></TextField>
+                        {breakfastInput.map(x => 
+                          <Grid container direction="row">
+                            <Grid item xs={11}>
+                              <TextField id="standard-full-width" fullWidth label="Menu Item" value={x}></TextField>
+                            </Grid>
+                            <Grid item xs={1} className={classes.removeIcon}>
+                              <CancelIcon color="disabled"></CancelIcon>
+                            </Grid>
+                          </Grid>  
+                        )}
+                        
                         <Grid container direction="row" className={classes.addItemGrid}>
-                          <AddIcon></AddIcon>
+                          <AddIcon onClick={handleAddClick}></AddIcon>
                           <Typography>Add item</Typography>
                         </Grid>
                       </Grid>
