@@ -1,11 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const logger = require('morgan');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+
+// Set up mondoDB connection
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/meal-planner",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+
+const db = mongoose.connection;
+
+db.on("error", function (err) {
+  console.error("connection error:", err);
+});
+
+db.once("open", function () {
+  console.log("db connection successful");
+});
 
 app.use("/", (req, res) => {
   return res.json("Hello");
