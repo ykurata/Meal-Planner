@@ -80,7 +80,6 @@ const useStyles = makeStyles(theme => ({
   removeIcon: {
     paddingTop: 20
   }
-  
 }));
 
 function Dashboard() {
@@ -89,8 +88,8 @@ function Dashboard() {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [breakfastInput, setBreakfastInput] = useState(["rice"]);
-  const [lunchInput, setLunchInput] = useState([]);
-  const [dinnerInput, setDinnerInput] = useState([]);
+  const [lunchInput, setLunchInput] = useState([""]);
+  const [dinnerInput, setDinnerInput] = useState([""]);
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen)
@@ -122,16 +121,41 @@ function Dashboard() {
     setOpen(false);
   };
   
-  // Handle add input field
-  const handleAddClick = () => {
+  
+  // Handle add breakfast input field
+  const addBreakfast = () => {
     setBreakfastInput([...breakfastInput, ""]);
   };
 
-  // Handle remove input item
-  const handleRemoveClick = index => {
-    const list = [...breakfastInput];
-    list.splice(index, 1);
-    setBreakfastInput(list);
+  // Handle add lunch input field
+  const addLunch = () => {
+    setLunchInput([...lunchInput, ""]);
+  };
+
+  // Handle add dinner input field
+  const addDinner = () => {
+    setDinnerInput([...dinnerInput, ""]);
+  };
+
+  // Handle remove breakfast input item
+  const removeBreakfast = index => {
+    const breakfastList = [...breakfastInput];
+    breakfastList.splice(index, 1);
+    setBreakfastInput(breakfastList);
+  }
+
+  // Handle remove lunch input item
+  const removeLunch = index => {
+    const lunchList = [...lunchInput];
+    lunchList.splice(index, 1);
+    setLunchInput(lunchList);
+  }
+
+  // Handle remove dinner input item
+  const removeDinner = index => {
+    const dinnerList = [...dinnerInput];
+    dinnerList.splice(index, 1);
+    setDinnerInput(dinnerList);
   }
 
 
@@ -228,13 +252,13 @@ function Dashboard() {
                               <TextField id="standard-full-width" fullWidth label="Menu Item" value={x}></TextField>
                             </Grid>
                             <Grid item xs={1} className={classes.removeIcon}>
-                              <CancelIcon color="disabled" onClick={handleRemoveClick}></CancelIcon>
+                              <CancelIcon color="disabled" onClick={removeBreakfast}></CancelIcon>
                             </Grid>
                           </Grid>  
                         )}
                         
                         <Grid container direction="row" className={classes.addItemGrid}>
-                          <AddIcon onClick={handleAddClick}></AddIcon>
+                          <AddIcon onClick={addBreakfast}></AddIcon>
                           <Typography>Add item</Typography>
                         </Grid>
                       </Grid>
@@ -242,9 +266,19 @@ function Dashboard() {
                       {/* Lunch grid */}
                       <Grid container direction="column">
                         <Typography variant="h6">Lunch</Typography>
-                        <TextField label="Menu Item"></TextField>
+                        {lunchInput.map(x => 
+                          <Grid container direction="row">
+                            <Grid item xs={11}>
+                              <TextField id="standard-full-width" fullWidth label="Menu Item" value={x}></TextField>
+                            </Grid>
+                            <Grid item xs={1} className={classes.removeIcon}>
+                              <CancelIcon color="disabled" onClick={removeLunch}></CancelIcon>
+                            </Grid>
+                          </Grid>  
+                        )}
+                        
                         <Grid container direction="row" className={classes.addItemGrid}>
-                          <AddIcon></AddIcon>
+                          <AddIcon onClick={addLunch}></AddIcon>
                           <Typography>Add item</Typography>
                         </Grid>
                       </Grid>
@@ -252,9 +286,19 @@ function Dashboard() {
                       {/* Dinner grid */}
                       <Grid container direction="column">
                         <Typography variant="h6">Dinner</Typography>
-                        <TextField label="Menu Item"></TextField>
+                        {dinnerInput.map(x => 
+                          <Grid container direction="row">
+                            <Grid item xs={11}>
+                              <TextField id="standard-full-width" fullWidth label="Menu Item" value={x}></TextField>
+                            </Grid>
+                            <Grid item xs={1} className={classes.removeIcon}>
+                              <CancelIcon color="disabled" onClick={removeDinner}></CancelIcon>
+                            </Grid>
+                          </Grid>  
+                        )}
+                        
                         <Grid container direction="row" className={classes.addItemGrid}>
-                          <AddIcon></AddIcon>
+                          <AddIcon onClick={addDinner}></AddIcon>
                           <Typography>Add item</Typography>
                         </Grid>
                       </Grid>
