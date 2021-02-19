@@ -127,6 +127,13 @@ function Dashboard() {
     setBreakfastInput([...breakfastInput, ""]);
   };
 
+  // Handle remove input item
+  const handleRemoveClick = index => {
+    const list = [...breakfastInput];
+    list.splice(index, 1);
+    setBreakfastInput(list);
+  }
+
 
     
   return (
@@ -221,7 +228,7 @@ function Dashboard() {
                               <TextField id="standard-full-width" fullWidth label="Menu Item" value={x}></TextField>
                             </Grid>
                             <Grid item xs={1} className={classes.removeIcon}>
-                              <CancelIcon color="disabled"></CancelIcon>
+                              <CancelIcon color="disabled" onClick={handleRemoveClick}></CancelIcon>
                             </Grid>
                           </Grid>  
                         )}
