@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DaySchema = new Schema({
-  userId: {
-    type: mongoose.Schema.types.objectId,
-    required: true
-  },
+  // userId: {
+  //   type: mongoose.Schema.types.objectId,
+  //   required: true
+  // },
   name: {
     type: String,
     required: true

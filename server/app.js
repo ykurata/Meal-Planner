@@ -3,10 +3,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
+const dayRoute = require('./routes/day'); 
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+
+// Routes
+app.use('/day', dayRoute); 
 
 // Set up mondoDB connection
 mongoose.connect(

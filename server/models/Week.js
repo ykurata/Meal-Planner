@@ -15,5 +15,7 @@ const WeekSchema = new Schema({
       type: mongoose.Schema.types.objectId,
       required: true
     }
-  ],
-})
+  ]
+});
+
+module.exports = Day = mongoose.model("Day", DaySchema);
