@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const days = await Day.findAll({});
+    const days = await Day.find({});
     return res.status(200).json(days);
   } catch (err) {
     console.log(err);
