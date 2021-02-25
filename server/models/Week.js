@@ -2,20 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const WeekSchema = new Schema({
-  userId: {
-    type: mongoose.Schema.types.objectId,
-    required: true
-  },
+  // userId: {
+  //   type: mongoose.Schema.types.objectId,
+  //   required: true
+  // },
   name: {
     type: String,
     required: true
   },
-  days: [
+  days:[
     {
-      type: mongoose.Schema.types.objectId,
-      required: true
+      day: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Day",
+      }
     }
   ]
 });
 
-module.exports = Day = mongoose.model("Day", DaySchema);
+module.exports = Week = mongoose.model("Week", WeekSchema);

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 
 const dayRoute = require('./routes/day'); 
+const weekRoute = require('./routes/week'); 
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/day', dayRoute); 
+app.use('/week', weekRoute); 
+
 
 // Set up mondoDB connection
 mongoose.connect(
