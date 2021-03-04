@@ -33,11 +33,6 @@ db.once("open", function () {
   console.log("db connection successful");
 });
 
-app.use("/", (req, res) => {
-  return res.json("Hello");
-});
-
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
 

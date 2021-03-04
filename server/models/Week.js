@@ -11,10 +11,10 @@ const WeekSchema = new Schema({
     required: true
   },
   days:[
-    {
+    { 
       day: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Day",
+        ref: "Day"
       }
     }
   ]
